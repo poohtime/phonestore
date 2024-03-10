@@ -1,0 +1,19 @@
+@font-face {
+  font-family: "Main Bold Eng";
+  src: url(../assets/fonts/MoebiusBoldEng.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Main Bold Kor";
+  src: url(../assets/fonts/MoebiusBoldKor.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Main Regular Eng";
+  src: url(../assets/fonts/MoebiusRegularEng.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Main Regular Kor";
+  src: url(../assets/fonts/MoebiusRegularKor.ttf) format("truetype");
+}
