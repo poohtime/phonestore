@@ -1,3 +1,4 @@
+import { HttpModule } from "@nestjs/axios";
 import { Module } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { AuthController } from "./auth.controller";
@@ -7,7 +8,12 @@ import { KakaoStrategy } from "./strategies/social-kakao-strategy";
 import { UsersModule } from "../users/users.module";
 
 @Module({
-    imports: [ConfigModule, JwtModule.register({}), UsersModule],
+    imports: [
+        ConfigModule,
+        HttpModule.register({}),
+        JwtModule.register({}),
+        UsersModule,
+    ],
     providers: [AuthService, KakaoStrategy],
     controllers: [AuthController],
 })

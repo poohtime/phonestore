@@ -2,19 +2,11 @@ import { IsEmail, IsNotEmpty, IsString } from "class-validator";
 
 export class SocialLoginDto {
     @IsNotEmpty()
-    @IsEmail()
-    email: string;
-
     @IsString()
-    @IsNotEmpty()
-    kakaoId: string;
-
-    @IsString()
-    @IsNotEmpty()
-    nickname: string;
+    token: string;
 }
 
-export class SocialRegistDto {
+export class SocialRegisterDto {
     @IsNotEmpty()
     @IsEmail()
     email: string;

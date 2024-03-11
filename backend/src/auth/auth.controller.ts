@@ -7,7 +7,7 @@ import { SocialUser, SocialUserAfterAuth } from "../users/users.decorator";
 import { Response } from "express";
 import { Post } from "@nestjs/common/decorators/http/request-mapping.decorator";
 import { Body } from "@nestjs/common/decorators/http/route-params.decorator";
-import { SocialRegistDto } from "./dtos/auth.dto";
+import { SocialLoginDto, SocialRegisterDto } from "./dtos/auth.dto";
 
 @Controller("auth")
 export class AuthController {
@@ -17,25 +17,20 @@ export class AuthController {
     ) {}
 
     @Post("register")
-    async register(@Body() socialRegistUser: SocialRegistDto) {
+    async register(@Body() socialRegistUser: SocialRegisterDto) {
+        console.log("d", socialRegistUser);
         await this.authService.OAuthRegister({
             socialRegisterDto: socialRegistUser,
         });
     }
 
-    @UseGuards(KakaoAuthGuard)
-    @Get("login")
-    async signIn(
-        @SocialUser() socialUser: SocialUserAfterAuth,
-        @Res({ passthrough: true }) res: Response,
-    ): Promise<void> {
-        const { accessToken, refreshToken } = await this.authService.OAuthLogin({
-                socialLoginDto: socialUser,
-            });
+    @Post("login")
+    signIn(@Body() loginDto: SocialLoginDto) {
+        // loginDto = { token: access_token }
+        const data = this.authService.OAuthLogin({
+            socialLoginDto: loginDto,
+        });
 
-        // res.cookie('refreshToken', refreshToken);
-        // res.cookie('accessToken', accessToken);
-        //
-        // res.redirect('/');
+        return data;
     }
 }

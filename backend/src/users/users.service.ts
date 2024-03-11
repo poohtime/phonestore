@@ -11,13 +11,13 @@ export class UsersService {
         private readonly usersRepository: Repository<Users>,
     ) {}
 
-    createUser({ email, kakaoId, nickname, phone }) {
+    createUser({ email, kakaoId, nickname, phoneNumber }) {
         const user = {
             kakaoEmail: email,
             kakaoId: kakaoId,
             kakaoName: nickname,
             kakaoProfileImg: "",
-            phoneNumber: phone,
+            phoneNumber: phoneNumber,
             isAdmin: false,
         };
 
@@ -36,9 +36,7 @@ export class UsersService {
 
         this.usersRepository.save(this.usersRepository.create(user));
     }
-    updateUser(id:number, ){
-
-    }
+    updateUser(id: number) {}
 
     removeUser(id: number, email: string) {
         const user = this.findUserByEmail(email);
