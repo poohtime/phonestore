@@ -1,0 +1,37 @@
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 94%;
+    height: 240px;
+    border: 1px black solid;
+    padding: 8px;
+    gap: 8px;
+    overflow-y: scroll;
+
+    & > strong {
+      font-family: "Main Bold", serif;
+      color: darkred;
+    }
+
+    & > div {
+      display: flex;
+      margin-left: 8px;
+      text-align: start;
+    }
+  }
+}
+
+.numberList  {
+  display: flex;
+  flex-direction: column;
+  width: calc(96% - 16px);
+  border: 1px rgba(80, 80, 80, 0.6) solid;
+  border-radius: 4px;
+  padding: 8px;
+}

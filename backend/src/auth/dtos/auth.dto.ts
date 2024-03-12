@@ -12,6 +12,9 @@ export class SocialRegisterDto {
     email: string;
 
     @IsString()
+    imageUrl: string;
+
+    @IsString()
     @IsNotEmpty()
     kakaoId: string;
 

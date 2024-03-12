@@ -7,6 +7,7 @@ export class AuthService {
         console.log(`${config.url}/auth/login`);
         return axios.post(`${config.url}/auth/login`, { token: code })
             .then((res) => {
+                console.log(res.data);
                 return res.data;
             });
     };

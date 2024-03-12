@@ -1,0 +1,66 @@
+.registerWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  & > div {
+    display: flex;
+    gap: 4px;
+    margin: 0;
+    font-family: "Main Regular", serif;
+
+    & > div {
+      display: flex;
+      flex-grow: 1;
+      align-items: center;
+    }
+
+    & > input {
+      display: flex;
+      flex-grow: 8;
+      font-family: "Main Regular", serif;
+      margin-right: 4px;
+      padding: 8px;
+      border: none;
+      border-radius: 8px;
+      background-color: white;
+      color: black;
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .registerWrapper {
+    width: 556px;
+    margin: 8px auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .registerWrapper {
+    width: 748px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .registerWrapper {
+    width: 924px;
+  }
+}
+
+.menuTitle {
+  display: flex;
+  align-items: flex-start;
+  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 20px;
+}
+
+.groupForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.registerButton {
+  display: flex;
+  justify-content: center;
+}

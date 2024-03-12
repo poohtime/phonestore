@@ -2,7 +2,6 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Users } from "src/entity/user.entity";
 import { Repository } from "typeorm";
-import { SignupDto } from "./dtos/signup.dto";
 
 @Injectable()
 export class UsersService {
@@ -11,17 +10,17 @@ export class UsersService {
         private readonly usersRepository: Repository<Users>,
     ) {}
 
-    createUser({ email, kakaoId, nickname, phoneNumber }) {
+    async createUser({ email, imageUrl, kakaoId, nickname, phoneNumber }) {
         const user = {
             kakaoEmail: email,
             kakaoId: kakaoId,
             kakaoName: nickname,
-            kakaoProfileImg: "",
+            kakaoProfileImg: imageUrl,
             phoneNumber: phoneNumber,
             isAdmin: false,
         };
 
-        this.usersRepository.save(this.usersRepository.create(user));
+        await this.usersRepository.save(this.usersRepository.create(user));
     }
 
     createAdmin({ email, kakaoId, nickname, phone }) {

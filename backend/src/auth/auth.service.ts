@@ -26,11 +26,14 @@ export class AuthService {
         // User 존재 여부 확인
         const { email } = socialRegisterDto;
         const user = await this.usersService.findUserByEmail(email);
+        socialRegisterDto.isUser = true;
 
         // User 없을 시, 회원 생성
         if (!user) {
-            this.usersService.createUser(socialRegisterDto);
+            await this.usersService.createUser(socialRegisterDto);
+            return socialRegisterDto;
         }
+
         // User 존재할 시, 예외 처리
         else {
             throw new UnauthorizedException(FailType.USERNAME_EXIST);
@@ -96,7 +99,8 @@ export class AuthService {
         console.log(responseUser);
         const kakaoId = responseUser.id;
         const email = responseUser.kakao_account.email;
-        const nickname = responseUser.kakao_account.profile.nickname;
+        const nickname = responseUser.properties.nickname;
+        const imageUrl = responseUser.properties.profile_image;
 
         // 존재하는 유저인지 확인
         const user = await this.usersService.findUserByEmail(email);
@@ -104,13 +108,12 @@ export class AuthService {
         // 아니라면 회원가입으로 넘어가도록 값을 반환
         if (!user) {
             console.log("hello", { isUser: false, kakaoId, email, nickname });
-            return { isUser: false, kakaoId, email, nickname };
+            return { isUser: false, kakaoId, imageUrl, email, nickname };
         }
-        //
-        // const accessToken = this.getAccessToken({ userId: user.kakaoId });
-        // const refreshToken = this.getRefreshToken({ userId: user.kakaoId });
-        //
-        // return { accessToken, refreshToken, user };
+        const accessToken = this.getAccessToken({ userId: user.kakaoId });
+        const refreshToken = this.getRefreshToken({ userId: user.kakaoId });
+
+        return { isUser: true, accessToken, refreshToken, user };
     }
 
     private getAccessToken({ userId }: IAuthServiceGetAccessToken): string {
